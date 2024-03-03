@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(NosoHive VERSION 1.0.0 DESCRIPTION "NosoHive Project")
+project(
+    NosoHive 
+    VERSION 1.0.0 
+    DESCRIPTION "NosoHive"
+    HOMEPAGE_URL "https://github.com/NosoLab/NosoHive")
 
 # Додаємо директиву для включення файлів із common
 include_directories(common)
@@ -26,8 +30,15 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 # Копіюємо виконувані файли в окрему папку
 add_custom_target(copy_target ALL
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive/data
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive/libs
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:wallet> ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:rpc> ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:tester-rpc> ${CMAKE_BINARY_DIR}/NosoHive
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/README.md ${CMAKE_BINARY_DIR}/NosoHive
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt ${CMAKE_BINARY_DIR}/NosoHive
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/res/config.ini.example ${CMAKE_BINARY_DIR}/NosoHive
     DEPENDS wallet rpc tester-rpc
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
 )
+

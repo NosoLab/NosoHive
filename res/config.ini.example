@@ -1,0 +1,10 @@
+[TesterRPC]
+DefaultHost=localhost
+DefaultPort=8080
+
+[RPC]
+DefaultHost=localhost
+DefaultPort=8080
+
+[Wallet]
+DefaultNameWallet=wallet.pkw

@@ -9,11 +9,13 @@ project(
 
 # Add the common directory to the include directories
 include_directories(common)
+include_directories(libs/ini)
 
 # Create the CommonLib library
 add_library(NosoCore
     common/common_file.cpp
 )
+
 
 # Add the executable targets
 add_executable(wallet wallet/wallet.cpp)

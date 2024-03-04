@@ -21,7 +21,7 @@ int requestRpc(std::string url, std::string method, std::string param)
         {"id", 0}};
 
     std::cout << std::setfill('-') << std::setw(40) << "-" << std::setfill(' ') << "\n";
-    std::cout << "Select RPC Server  -> " << GREEN << BOLD << url << RESET << std::endl;
+    std::cout << "Select RPC Server -> " << GREEN << BOLD << url << RESET << std::endl;
     std::cout << "Select Method -> " << YELLOW << BOLD << method << RESET << std::endl;
 
     if (!param.empty())
@@ -97,15 +97,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (method.empty())
-    {
-        std::cerr << "Specify the required method for testing" << std::endl;
-        return 1;
-    }
-
     if (url.empty())
     {
         std::cerr << "Specify the RPC address you want to test" << std::endl;
+        return 1;
+    }
+    if (method.empty())
+    {
+        std::cerr << "Specify the required method for testing" << std::endl;
         return 1;
     }
 

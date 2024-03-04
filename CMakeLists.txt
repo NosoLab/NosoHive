@@ -2,29 +2,34 @@ cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_CXX_STANDARD 17)
 set(DEFAULT_BUILD_TYPE "Release")
+
 project(
     NosoHive 
     VERSION 1.0.0 
     DESCRIPTION "NosoHive"
     HOMEPAGE_URL "https://github.com/NosoLab/NosoHive"
 )
+
+# Add libary CPR
 include(FetchContent)
 FetchContent_Declare(cpr GIT_REPOSITORY https://github.com/libcpr/cpr.git
                          GIT_TAG 3020c34ae2b732121f37433e61599c34535e68a8) 
                          FetchContent_MakeAvailable(cpr)
 
 
+# Add libary nlohmann_json                     
+find_package(nlohmann_json 3.11.2 REQUIRED)
+
 # Add the common directory to the include directories
 include_directories(common)
-include_directories(libs/ini)
-
-find_package(nlohmann_json 3.11.2 REQUIRED)
 
 # Create the CommonLib library
 add_library(NosoCore
     common/common_file.cpp
 )
 
+# Add libary ini  
+include_directories(libs/ini)
 
 # Add the executable targets
 add_executable(wallet wallet/wallet.cpp)

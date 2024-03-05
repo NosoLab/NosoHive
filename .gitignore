@@ -1,3 +1,4 @@
 /build
 /testfiles
 .vscode
+/tester-rpc/tester-rpc

@@ -14,7 +14,8 @@
 
 int requestRpc(std::string url, std::string method, std::string param)
 {
-    nlohmann::json requestJson = {
+    using json = nlohmann::json;
+    json requestJson = {
         {"jsonrpc", "2.0"},
         {"method", method},
         {"params", {param}},
@@ -47,7 +48,7 @@ int requestRpc(std::string url, std::string method, std::string param)
             return 1;
         }
 
-        nlohmann::json responseJson = nlohmann::json::parse(response.text);
+        json responseJson = json::parse(response.text);
         if (responseJson.contains("result"))
         {
             std::cout << "RPC Status code: " << response.status_code << std::endl;

@@ -32,12 +32,12 @@ add_library(NosoCore
 include_directories(libs/ini)
 
 # Add the executable targets
-add_executable(wallet wallet/wallet.cpp)
+add_executable(wallet-cli wallet-cli/wallet-cli.cpp)
 add_executable(rpc rpc/rpc.cpp)
 add_executable(tester-rpc tester-rpc/tester-rpc.cpp)
 
 # Link the common library to the executables
-target_link_libraries(wallet NosoCore)
+target_link_libraries(wallet-cli NosoCore)
 target_link_libraries(rpc NosoCore)
 target_link_libraries(tester-rpc PRIVATE NosoCore cpr::cpr nlohmann_json::nlohmann_json)
 
@@ -49,12 +49,12 @@ add_custom_target(copy_target ALL
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive/data
     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/NosoHive/libs
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:wallet> ${CMAKE_BINARY_DIR}/NosoHive
+    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:wallet-cli> ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:rpc> ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:tester-rpc> ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/README.md ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt ${CMAKE_BINARY_DIR}/NosoHive
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/res/config.ini.example ${CMAKE_BINARY_DIR}/NosoHive
-    DEPENDS wallet rpc tester-rpc
+    DEPENDS wallet-cli rpc tester-rpc
     COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/bin
 )

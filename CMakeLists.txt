@@ -23,16 +23,19 @@ find_package(nlohmann_json 3.11.2 REQUIRED)
 # Add the common directory to the include directories
 include_directories(common)
 
-# Create the CommonLib library
+# Create the NosoCore library
 add_library(NosoCore
-    common/common_file.cpp
+    common/src/Core.cpp
 )
 
 # Add libary ini  
 include_directories(libs/ini)
 
 # Add the executable targets
-add_executable(wallet-cli wallet-cli/wallet-cli.cpp)
+add_executable(wallet-cli 
+wallet-cli/wallet-cli.cpp
+wallet-cli/src/CommandHandler.cpp
+)
 add_executable(rpc rpc/rpc.cpp)
 add_executable(tester-rpc tester-rpc/tester-rpc.cpp)
 
